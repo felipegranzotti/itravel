@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro Interativo de Viagem: Itália, Veneza, Suíça & Frankfurt</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ferrari: '#DC0000',
+                        lambo: '#FFC72C',
+                        azurro: '#0055A5',
+                        venice: '#008080'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .tab-btn.active {
+            border-bottom: 4px solid #DC0000;
+            color: #DC0000;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col text-sm sm:text-base">
+
+    <!-- HEADER -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <span class="bg-ferrari text-white p-2.5 rounded-xl font-bold text-xl sm:text-2xl shadow-md">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                    </span>
+                    <div>
+                        <h1 class="font-black text-lg sm:text-xl md:text-2xl leading-tight">Itália, Veneza & Motor Valley 2026</h1>
+                        <p class="text-xs sm:text-sm text-slate-300 font-medium">28/09 a 16/10 • Felipe & Família (Ritmo Leve & Otimizado)</p>
+                    </div>
+                </div>
+                <div class="hidden lg:flex items-center space-x-3 text-xs sm:text-sm font-semibold">
+                    <span class="bg-pink-900/90 text-pink-200 px-3.5 py-2 rounded-full border border-pink-600 shadow-sm">
+                        <i class="fa-solid fa-baby-carriage text-pink-300 mr-1.5"></i> Gestante de 6 Meses
+                    </span>
+                    <span class="bg-teal-900/90 text-teal-200 px-3.5 py-2 rounded-full border border-teal-600 shadow-sm">
+                        <i class="fa-solid fa-water-ladder text-teal-300 mr-1.5"></i> Veneza Sem Pontes
+                    </span>
+                    <span class="bg-slate-800 px-3.5 py-2 rounded-full border border-slate-700">
+                        <i class="fa-solid fa-plane-arrival text-emerald-400 mr-1.5"></i> Chegada Roma 29/09 23:10
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO -->
+    <div class="bg-white border-b border-slate-200 sticky top-20 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex space-x-6 overflow-x-auto no-scrollbar py-1" id="mainTabs">
+                <button onclick="switchTab('diag')" id="tab-diag" class="tab-btn active py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-sliders mr-2"></i>Transporte & Conforto
+                </button>
+                <button onclick="switchTab('daybyday')" id="tab-daybyday" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-regular fa-calendar-days mr-2"></i>Roteiro Detalhado & Gastronomia
+                </button>
+                <button onclick="switchTab('hoteis')" id="tab-hoteis" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-hotel mr-2"></i>Guia de Hotéis
+                </button>
+                <button onclick="switchTab('veneza')" id="tab-veneza" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-water-ladder mr-2"></i>Especial Veneza
+                </button>
+                <button onclick="switchTab('motors')" id="tab-motors" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-car-side mr-2"></i>Rota F1 & Carros
+                </button>
+                <button onclick="switchTab('gastronomia')" id="tab-gastronomia" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-utensils mr-2"></i>Guia de Gastronomia
+                </button>
+                <button onclick="switchTab('reservas')" id="tab-reservas" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-bookmark mr-2"></i>Resumo para Reservas
+                </button>
+                <button onclick="switchTab('orcamento')" id="tab-orcamento" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-calculator mr-2"></i>Calculadora de Despesas
+                </button>
+                <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-clipboard-check mr-2"></i>Requisitos, PID & Gestação
+                </button>
+                <button onclick="switchTab('extras')" id="tab-extras" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-passport mr-2"></i>Suíça & Frankfurt
+                </button>
+                <button onclick="switchTab('links')" id="tab-links" class="tab-btn py-3.5 px-2 text-sm sm:text-base font-semibold whitespace-nowrap text-slate-600 hover:text-ferrari transition">
+                    <i class="fa-solid fa-globe mr-2"></i>Central de Links Oficiais
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: DIAGNÓSTICO DE TRANSPORTE & CONFORTO -->
+        <section id="sec-diag" class="space-y-6">
+            <!-- ALERTA ESPECIAL GESTANTE -->
+            <div class="bg-pink-50 border-2 border-pink-300 rounded-2xl p-6 text-pink-950 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-5 shadow-sm">
+                <div class="w-14 h-14 rounded-2xl bg-pink-200 text-pink-700 flex items-center justify-center text-3xl flex-shrink-0 shadow-inner">
+                    <i class="fa-solid fa-baby-carriage"></i>
+                </div>
+                <div class="space-y-2 text-sm sm:text-base">
+                    <h3 class="font-extrabold text-lg sm:text-xl text-pink-900">Otimização de Conforto: Gestante de 6 Meses & Ritmo Moderado</h3>
+                    <p class="text-slate-700">O roteiro foi reestruturado com **redução de 1 dia em Roma** para garantir transições mais tranquilas pelo Motor Valley e Veneza:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                        <div class="bg-white p-4 rounded-xl border border-pink-200 font-medium text-pink-950 shadow-sm">
+                            <i class="fa-solid fa-clock text-pink-600 mr-2 text-lg"></i><b>Blocos Únicos:</b> Apenas 1 atração principal por período (Manhã, Tarde, Noite).
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-pink-200 font-medium text-pink-950 shadow-sm">
+                            <i class="fa-solid fa-bridge-water text-teal-600 mr-2 text-lg"></i><b>Veneza Sem Pontes:</b> Hospedagem ao lado da estação (Cannaregio) sem subir degraus com malas.
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-pink-200 font-medium text-pink-950 shadow-sm">
+                            <i class="fa-solid fa-car text-ferrari mr-2 text-lg"></i><b>Malas no SUV:</b> Porta-malas do carro acomoda bagagens grandes entre Florença e Bolonha.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIAGNOSTIC CARDS -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-suitcase-rolling"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Logística de Deslocamentos Otimizada</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Combinação entre Trens de Alta Velocidade (cidades) e Veículo SUV (Motor Valley).</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+                    <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50 opacity-90">
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Inconveniente</span>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-800 mt-3 mb-2"><i class="fa-solid fa-car text-slate-600 mr-2"></i>Dirigir em Centros Históricos</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 mb-4">Carros não entram em áreas de ZTL em Roma, Florença ou Milão. Risco de multas e estacionamentos de € 50/dia.</p>
+                    </div>
+
+                    <div class="border-2 border-emerald-500 rounded-2xl p-6 bg-emerald-50/60 shadow-md">
+                        <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Solução Vencedora</span>
+                        <h3 class="text-lg sm:text-xl font-bold text-emerald-950 mt-3 mb-2"><i class="fa-solid fa-wand-magic-sparkles text-emerald-600 mr-2"></i>Modelo Híbrido Inteligente</h3>
+                        <p class="text-xs sm:text-sm text-emerald-900 mb-4">Trem rápido para eixos urbanos e SUV alugado no trecho Florença (Aeroporto FLR - Fora da ZTL) → Motor Valley → Devolução Bolonha (Estação Central).</p>
+                        <ul class="text-xs sm:text-sm space-y-2 text-emerald-900 font-medium">
+                            <li class="flex items-start"><i class="fa-solid fa-check text-emerald-600 mr-2 mt-1"></i><b>Bolonha → Veneza:</b> Trem Frecciarossa desembarcando direto dentro da ilha em 1h30.</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-emerald-600 mr-2 mt-1"></i><b>Veneza → Milão:</b> Apenas 2h00 de trem direto no fim da tarde.</li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50 opacity-90">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Lugano sem Malas</span>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-800 mt-3 mb-2"><i class="fa-solid fa-mountain text-slate-600 mr-2"></i>Suíça Express</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 mb-4">Bate-volta a Lugano de trem direto (1h02m) partindo de Milão **sem levar bagagens**.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ROTEIRO DETALHADO DIA A DIA COM GASTRONOMIA -->
+        <section id="sec-daybyday" class="hidden space-y-8">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <span class="text-sm font-bold text-slate-600 uppercase tracking-wider">Filtrar por Região:</span>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button onclick="filterDays('all', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-900 text-white font-bold">Todas (18 Dias)</button>
+                    <button onclick="filterDays('roma', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Roma (-1 Dia Otimizado)</button>
+                    <button onclick="filterDays('toscana', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Florença & Pisa</button>
+                    <button onclick="filterDays('motor', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Motor Valley (Senna/Ferrari/Lambo)</button>
+                    <button onclick="filterDays('veneza', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Veneza Canais</button>
+                    <button onclick="filterDays('milao', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Milão & Suíça</button>
+                    <button onclick="filterDays('frankfurt', this)" class="day-filter-btn px-4 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">Frankfurt (Stopover)</button>
+                </div>
+            </div>
+
+            <!-- CONTAINER DOS DIAS -->
+            <div class="space-y-8" id="daysList">
+
+                <!-- DIA 0: 28/09 (SEG) -->
+                <div class="day-card region-roma bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">28/SET (SEG)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Embarque em São Paulo (GRU)</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full w-fit border border-blue-200">
+                            <i class="fa-solid fa-plane-departure mr-1.5"></i>Voo LATAM LA8070 às 23:40
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Revisão final de malas de mão e documentos (PID, passaportes, apólices de seguro).</li>
+                                <li>Repouso e tranquilidade em casa antes do deslocamento.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>19:30 - Deslocamento antecipado para o Aeroporto de Guarulhos (GRU).</li>
+                                <li>Check-in e despache tranquilo de malas grandes.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌙 NOITE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>23:40 - Embarque no voo LA8070 rumo a Frankfurt.</li>
+                                <li>Uso de meias de compressão durante o voo para a gestante.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- RECOMENDAÇÕES DE GASTRONOMIA -->
+                    <div class="bg-slate-900 text-white p-5 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Alimentação & Experiência no Embarque (GRU):
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Sala VIP Executive Lounge / Bradesco Cartões (Terminal 3)</p>
+                                <p class="text-slate-400 text-xs">Buffet quente completo, poltronas confortáveis para descanso da gestante.</p>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Restaurante Olive Garden (Terminal 3)</p>
+                                <p class="text-slate-400 text-xs">Refeições completas, massas saborosas e serviço rápido de mesa.</p>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Bakehouse / Casa do Pão de Queijo</p>
+                                <p class="text-slate-400 text-xs">Lanches rápidos, sucos naturais e água para hidratação pré-voo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 1: 29/09 (TER) - DESLOCAMENTO -->
+                <div class="day-card region-roma bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl border-2 border-blue-500 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-blue-600 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">29/SET (TER)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Chegada Noturna em Roma (FCO)</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-plane-arrival mr-1.5"></i>Pouso FCO 23:10
+                        </span>
+                    </div>
+
+                    <!-- CRONOGRAMA DE HORÁRIOS SUGERIDOS -->
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários Sugeridos:</span>
+                        <span>16:25 Pouso Frankfurt</span>
+                        <span>21:20 Voo Lufthansa LH242</span>
+                        <span>23:10 Pouso Roma FCO</span>
+                        <span>00:15 Arrival Hotel Prati (Aviso Late Check-in)</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Voo transatlântico em rota sobre o Atlântico.</li>
+                                <li>Foco em hidratação e repouso da esposa.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>16:25 - Pouso em Frankfurt (FRA).</li>
+                                <li>Conexão de 4h55 em lounge reservado com poltronas reclináveis.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌙 NOITE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>23:10 - Pouso no Fiumicino (FCO).</li>
+                                <li>Transfer privativo com motorista aguardando com placa para transporte ao hotel em Prati.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Jantar/Lanche na Chegada Noturna:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Lufthansa Senator Lounge (FRA)</p>
+                                <p class="text-slate-400 text-xs">Jantar quente completo de culinária alemã e internacional durante a conexão.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Käfer Bakery / Bistro (Aeroporto FRA)</p>
+                                <p class="text-slate-400 text-xs">Sanduíches artesanais alemães, pretzel fresco e chás quentes.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Room Service Nocturno / Conveniência FCO</p>
+                                <p class="text-slate-400 text-xs">Snack leve e água mineral comprada na saída do desembarque em Roma.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 2: 30/09 (QUA) -->
+                <div class="day-card region-roma bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">30/SET (QUA)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Roma Histórica & Trevi Iluminada</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-full w-fit">
+                            <i class="fa-solid fa-monument mr-1.5"></i>Roma Centro
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 09:30 | Café 10:00 | Passeio 11:30 | Repouso 16:00 | Saída Noturna 19:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Despertar sem pressa para recuperação total do jet lag.</li>
+                                <li>Café da manhã calmo no hotel em Prati.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Piazza Navona e Palazzo Pamphilj (Embaixada do Brasil).</li>
+                                <li>Pausa para repouso e elevação de pernas da gestante no hotel.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-moon text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Fontana di Trevi & Pantheon Iluminados:</b> Caminhada noturna charmosa com fluxo reduzido de turistas.</li>
+                                <li>Gelato artesanal noturno na Piazza Sant'Eustachio.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Almoço/Jantar em Roma Centro:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante Aroma (Colosseo)</p>
+                                <p class="text-slate-600 text-xs">Estrela Michelin com vista estonteante em frente ao Coliseu iluminado.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Flavio al Velavevodetto (Testaccio)</p>
+                                <p class="text-slate-600 text-xs">A melhor Carbonara e Cacio e Pepe tradicional romana (€20-25/pessoa).</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Trattoria Da Remo (Testaccio)</p>
+                                <p class="text-slate-600 text-xs">Pizza romana fina e crocante frequentada por moradores locais (€10-15/pessoa).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 3: 01/10 (QUI) -->
+                <div class="day-card region-roma bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">01/OUT (QUI)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Coliseu Preferencial & Concerto Clássico</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full w-fit border border-amber-200">
+                            <i class="fa-solid fa-person-breastfeeding mr-1.5"></i>Acesso Preferencial
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:00 | Coliseu 09:30 | Almoço Monti 12:30 | Repouso 15:00 | Concerto 19:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Visita ao Coliseu com **Acesso Preferencial de Gestante** sem filas.</li>
+                                <li>Caminhada plana pelo Fórum Romano.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Almoço no charmoso Rione Monti.</li>
+                                <li>Retorno ao hotel para descanso da tarde.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-music text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Concerto Lirico Noturno:</b> "As Quatro Estações de Vivaldi / Os Três Tenores" na igreja *St. Paul Within the Walls*.</li>
+                                <li>Jantar no Rione Monti após o espetáculo.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Almoço/Jantar em Rione Monti:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Roscioli Salumeria con Cucina</p>
+                                <p class="text-slate-600 text-xs">Massa impecável com seleção dos melhores frios artesanais da Itália.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Osteria da Zi Umberto</p>
+                                <p class="text-slate-600 text-xs">Ambiente acolhedor, gnocchi artesanal e excelente custo-benefício em Monti.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Trapizzino Monti</p>
+                                <p class="text-slate-600 text-xs">Famoso bolso de pizza recheado com pratos tradicionais romanos (€5-8/unidade).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 4: 02/10 (SEX) -->
+                <div class="day-card region-roma bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">02/OUT (SEX)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Vaticano Secreto & Pôr do Sol no Sant'Angelo</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full w-fit border border-amber-200">
+                            <i class="fa-solid fa-church mr-1.5"></i>Vaticano
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 07:30 | Museus 09:00 | Basílica 11:30 | Minibus Jardins 14:30 | Noite 19:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Museus do Vaticano e Capela Sistina (Acesso prioritário).</li>
+                                <li>Basílica de São Pedro.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Tour panorâmico de Minibus sentado pelos Jardins Vaticanos (100% confortável).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-camera text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Pôr do Sol & Castelo Sant'Angelo:</b> Vista da Ponte dos Anjos sobre o Rio Tevere ao entardecer.</li>
+                                <li>Jantar requintado próximo ao Vaticano.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Almoço/Jantar em Prati/Vaticano:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Il Pagliaccio (2 Estrelas Michelin)</p>
+                                <p class="text-slate-600 text-xs">Alta gastronomia italiana criativa e atendimento memorável.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Ristorante Il Sorpasso (Prati)</p>
+                                <p class="text-slate-600 text-xs">Ambiente moderno, massas frescas e tábuas de queijos de pequenos produtores.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Pizzeria L'Isola della Pizza</p>
+                                <p class="text-slate-600 text-xs">Pizzaria tradicional em Prati com forno a lenha e preços locais excelentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 5: 03/10 (SÁB) - DESLOCAMENTO 1 -->
+                <div class="day-card region-toscana bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-900 text-white rounded-2xl border-2 border-emerald-500 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-emerald-600 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">03/OUT (SÁB)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Roma → Trem para Florença & Pôr do Sol Único</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-train mr-1.5"></i>Frecciarossa (1h30)
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>07:30 Acordar</span>
+                        <span>09:20 Trem Roma Termini</span>
+                        <span>10:52 Arrival Florença SMN</span>
+                        <span>18:00 Pôr do Sol Piazzale</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Embarque em trem Frecciarossa Prima até Florença SMN.</li>
+                                <li>Deixar malas no hotel ao lado da estação (guarda-bagagem).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Caminhada plana até o Duomo e Piazza della Signoria.</li>
+                                <li>Almoço em bistrô tradicional florentino.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-mountain-sun text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Mirante Piazzale Michelangelo:</b> Táxi direto até o topo para ver Florença dourada ao pôr do sol.</li>
+                                <li>Jantar romântico no bairro Oltrarno.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Almoço/Jantar em Florença:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Enoteca Pinchiorri (3 Estrelas Michelin)</p>
+                                <p class="text-slate-400 text-xs">Um dos templos gastronômicos e de vinho mais lendários da Europa.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Trattoria 4 Leoni (Oltrarno)</p>
+                                <p class="text-slate-400 text-xs">Famoso pelo autêntico Fiocchetti di Pera ao molho de queijos (€20-28/pessoa).</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">All'Antico Vinaio / Trattoria Mario</p>
+                                <p class="text-slate-400 text-xs">A schiacciata recheada mais famosa do mundo (€8-10) ou almoço no Mario (€15).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 6: 04/10 (DOM) -->
+                <div class="day-card region-toscana bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">04/OUT (DOM)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Bate-Volta a Pisa & Ópera de Bolso</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-emerald-50 text-emerald-800 rounded-full w-fit border border-emerald-200">
+                            <i class="fa-solid fa-monument mr-1.5"></i>Pisa & Florença
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:00 | Trem Pisa 09:30 | Torre Pisa 11:00 | Retorno Florença 15:30 | Ópera 20:00</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Trem regional rápido de 50 min até Pisa.</li>
+                                <li>Fotos na Torre Inclinada e Piazza dei Miracoli.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Retorno a Florença.</li>
+                                <li>Passeio na Ponte Vecchio e feira de couro de San Lorenzo.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-masks-theater text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Recital de Ópera em Igreja Histórica:</b> Árias de Ópera Italiana na antiga igreja *Santa Monaca*.</li>
+                                <li>Gelato artesanal na *Gelateria La Carraia*.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Alimentação em Pisa & Florença:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante Buca Lapi (Florença)</p>
+                                <p class="text-slate-600 text-xs">O melhor Bistecca alla Fiorentina preparado no carvão de madeira em uma adega do século XV.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Osteria Santo Spirito (Florença)</p>
+                                <p class="text-slate-600 text-xs">Gnocchi gratinado e pratos toscanos autênticos sem preços inflacionados.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">I' Girone De' Ghiotti (Florença)</p>
+                                <p class="text-slate-600 text-xs">Schiacciata toscana recheada na hora por €7-9, com fila rápida.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 7: 05/10 (SEG) - DESLOCAMENTO 2 -->
+                <div class="day-card region-motor bg-gradient-to-br from-red-950 via-slate-900 to-slate-900 text-white rounded-2xl border-2 border-red-500 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-ferrari text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">05/OUT (SEG)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Retirada SUV Florença → Ímola (Senna) → Modena</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-red-500/20 text-red-300 border border-red-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-car-side mr-1.5"></i>Inicio Rota SUV
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>07:30 Acordar</span>
+                        <span>09:00 Retirada SUV Aeroporto FLR (Fora ZTL)</span>
+                        <span>11:30 Chegada Ímola (Senna)</span>
+                        <span>16:00 Check-in Executive Hotel Modena (Garagem)</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Retirada do SUV no Aeroporto de Florença (Amerigo Vespucci - FLR) para evitar totalmente a ZTL central.</li>
+                                <li>Viagem agradável de 1h15 até Ímola com malas no porta-malas.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li><b>Memorial Ayrton Senna em Ímola:</b> Parco delle Acque Minerali, estátua na Tamburello e Mural Kobra.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-wine-glass text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Centro Histórico de Modena Noturno:</b> Check-in no Executive Hotel Modena (garagem coberta privativa).</li>
+                                <li>Passeio na Piazza Grande e degustação de Vinagre Balsâmico Tradicional.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Gastronomia em Ímola & Modena:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Osteria Francescana (Massimo Bottura)</p>
+                                <p class="text-slate-400 text-xs">Considerado um dos 3 melhores restaurantes do mundo em Modena (reserva prévia).</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Osteria di Modena Rossi / Hostaria San Domenico (Ímola)</p>
+                                <p class="text-slate-400 text-xs">Massas recheadas de Modena (Tortellini) em caldo rico a preços muito justos.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Mercato Albinelli (Modena)</p>
+                                <p class="text-slate-400 text-xs">Mercado histórico coberto com tábuas de frios de Parma e focaccia recheada (€8-12).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 8: 06/10 (TER) -->
+                <div class="day-card region-motor bg-white rounded-2xl border-2 border-red-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-ferrari text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">06/OUT (TER)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Ferrari Day: Maranello & Casa Enzo Modena</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-red-100 text-ferrari rounded-full w-fit border border-red-200">
+                            <i class="fa-solid fa-car mr-1.5"></i>Scuderia Ferrari
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:00 | Museu Maranello 09:30 | Almoço Cavallino 12:30 | Museo Casa Enzo 15:30 | Noite 19:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Museo Ferrari Maranello (carros de F1, troféus e simulador cockpit).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Almoço no Ristorante Cavallino e Museo Casa Enzo Ferrari Modena.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-guitar text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Aperitivo na Torre Ghirlandina:</b> Noite na Piazza Grande com Vinho Lambrusco e Tábua de Frios de Parma no *Café Concerto*.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Alimentação no Dia Ferrari:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante Cavallino (Maranello)</p>
+                                <p class="text-slate-600 text-xs">Restaurante oficial em frente aos portões históricos da fábrica da Ferrari.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Trattoria Il Leorcaro (Maranello)</p>
+                                <p class="text-slate-600 text-xs">Frequentado pelos mecânicos e engenheiros da Ferrari; comida emiliana excelente.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Pizzeria Pit-Stop Maranello</p>
+                                <p class="text-slate-600 text-xs">Pizzaria temática rápida e gostosa perto do museu (€8-12/pessoa).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 9: 07/10 (QUA) -->
+                <div class="day-card region-motor bg-white rounded-2xl border-2 border-amber-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">07/OUT (QUA)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Lamborghini Sant'Agata & Bolonha Jazz</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-amber-100 text-amber-900 rounded-full w-fit border border-amber-200">
+                            <i class="fa-solid fa-bolt mr-1.5"></i>Lamborghini
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:30 | Lamborghini 10:00 | Almoço Bolonha 13:00 | Pórticos 15:30 | Noite 20:00</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Museo Automobili Lamborghini em Sant'Agata Bolognese (Revuelto, Countach e Miura).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Deslocamento para o centro de Bolonha.</li>
+                                <li>Almoço e passeio pelos pórticos da UNESCO.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-music text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Noite de Jazz na Cidade da Música (UNESCO):</b> Show de jazz ao vivo acompanhado de jantar na lendária *Cantina Bentivoglio*.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções de Gastronomia em Bolonha:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante I Carracci</p>
+                                <p class="text-slate-600 text-xs">Jantar sob afrescos do século XVI com gastronomia emiliana refinada.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Trattoria Anna Maria (Bolonha)</p>
+                                <p class="text-slate-600 text-xs">Considerada a melhor Tagliatelle al Ragù Bolognese artesanal da Itália.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Osteria del Sole (A mais antiga de 1465)</p>
+                                <p class="text-slate-600 text-xs">Compre frios e pão no mercado vizinho e pague apenas o vinho na osteria (€5-10).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 10: 08/10 (QUI) - DESLOCAMENTO 3 PARA VENEZA -->
+                <div class="day-card region-veneza bg-gradient-to-br from-teal-950 via-slate-900 to-slate-900 text-white rounded-2xl border-2 border-teal-400 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-teal-600 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">08/OUT (QUI)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Devolução SUV Bolonha → Trem para Veneza</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-teal-500/20 text-teal-300 border border-teal-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-water-ladder mr-1.5"></i>Entrada em Veneza
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>08:00 Acordar em Modena</span>
+                        <span>09:30 Devolução SUV na Estação Bologna Centrale</span>
+                        <span>10:30 Trem Frecciarossa Bolonha → Veneza</span>
+                        <span>12:00 Chegada Venezia Santa Lucia</span>
+                        <span>17:30 Gôndola em Cannaregio</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Devolução prática do SUV na agência da estação Bologna Centrale.</li>
+                                <li>Trem Frecciarossa direto para Venezia Santa Lucia (1h30).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Check-in no hotel ao lado da estação em Cannaregio (sem pontes com malas!).</li>
+                                <li>Passeio de Vaporetto no Canal Grande.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-ship text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Passeio de Gôndola ao Pôr do Sol:</b> Navegação relaxante pelos canais de Cannaregio.</li>
+                                <li>Degustação de *cicchetti* venezianos.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Gastronomia em Veneza:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Ristorante Glam (2 Estrelas Michelin) / Quadri</p>
+                                <p class="text-slate-400 text-xs">Culinária alta veneziana dentro de um jardim privativo e vista San Marco.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Osteria al Cicheto / Osteria Bea Vita</p>
+                                <p class="text-slate-400 text-xs">Frutos do mar frescos, risoto de lula e atendimento atencioso em Cannaregio.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Bacareto da Lele / Farini Bakery</p>
+                                <p class="text-slate-400 text-xs">Pãezinhos tradicionais com queijo por €1,50 e fatias de pizza de massa alta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 11: 09/10 (SEX) - DESLOCAMENTO 4 PARA MILÃO -->
+                <div class="day-card region-milao bg-gradient-to-br from-sky-950 via-slate-900 to-slate-900 text-white rounded-2xl border-2 border-sky-400 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-azurro text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">09/OUT (SEX)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Veneza San Marco → Trem para Milão</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-sky-500/20 text-sky-300 border border-sky-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-train mr-1.5"></i>Frecciarossa para Milão (2h)
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>08:00 Acordar</span>
+                        <span>09:30 Piazza San Marco</span>
+                        <span>13:00 Almoço Rialto</span>
+                        <span>16:30 Trem para Milão</span>
+                        <span>19:30 Aperitivo Navigli</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Visita à Piazza San Marco, Basílica e Ponte dos Suspiros.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Almoço perto de Rialto.</li>
+                                <li>Embarque no trem Frecciarossa das 16:30 para Milano Centrale (2h00).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-martini-glass-citrus text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Aperitivo Milanês nos Canais Navigli:</b> Noite nos canais iluminados com buffet e bebida.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Alimentação em Milão (Navigli):
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Enrico Bartolini al MUDEC (3 Estrelas Michelin)</p>
+                                <p class="text-slate-400 text-xs">O restaurante mais premiado de Milão para uma experiência inesquecível.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Trattoria Milanese 1933 / Al Pont de Ferr</p>
+                                <p class="text-slate-400 text-xs">Autêntico Risotto alla Milanese com açafrão e Ossobuco macio (€25-35).</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Luini Panzerotti / Spontini Pizza</p>
+                                <p class="text-slate-400 text-xs">O famoso panzerotto frito de Milão recheado de queijo por €4,50.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 12: 10/10 (SÁB) -->
+                <div class="day-card region-milao bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">10/OUT (SÁB)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Milão: Duomo, Galleria & Teatro alla Scala</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-sky-50 text-sky-800 rounded-full w-fit border border-sky-200">
+                            <i class="fa-solid fa-building-columns mr-1.5"></i>Milão Moda & Cultura
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:30 | Duomo 10:00 | Galleria 12:30 | Repouso 16:00 | La Scala 19:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Duomo de Milão com subida de **elevador** aos terraços com vista dos Alpes.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Galleria Vittorio Emanuele II e Quadrilátero da Moda.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-building-ngo text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Noite no Teatro alla Scala:</b> Visita ou concerto no templo lírico mundial.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Alimentação no Centro de Milão:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante Cracco (Galleria)</p>
+                                <p class="text-slate-600 text-xs">Dentro da Galleria Vittorio Emanuele II, comandado pelo Chef Carlo Cracco.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Camparino in Galleria / Osteria del Binari</p>
+                                <p class="text-slate-600 text-xs">Bistrô histórico para risoto milanês e o famoso drink Campari das origens.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Mercato Centrale Milano</p>
+                                <p class="text-slate-600 text-xs">Praça gastronômica incrível ao lado da estação com dezenas de quiosques (€12-18).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 13: 11/10 (DOM) -->
+                <div class="day-card region-milao bg-white rounded-2xl border-2 border-sky-300 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-azurro text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">11/OUT (DOM)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Bate-Volta Suíça Italiana (Lugano) - Sem Bagagem</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-sky-100 text-sky-800 rounded-full w-fit border border-sky-200">
+                            <i class="fa-solid fa-mountain mr-1.5"></i>1h02m Trem EuroCity
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 07:30 | Trem EuroCity 09:10 | Lago Lugano 10:30 | Funicular 15:00 | Retorno 18:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Trem EuroCity de Milano Centrale para Lugano (1h02m).</li>
+                                <li>Passeio pelo Parco Ciani à beira do lago.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Chocolates na Via Nassa e Funicular ao Monte San Salvatore.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-utensils text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Retorno a Milão:</b> Jantar descontraído no Mercato Centrale Milano.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Alimentação em Lugano (Suíça):
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Ristorante Enoteca del Porto</p>
+                                <p class="text-slate-600 text-xs">Gastronomia suíço-italiana de alto nível de frente para o Lago de Lugano.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Grotto Morcote / Grand Café Al Porto</p>
+                                <p class="text-slate-600 text-xs">Café histórico de 1803 com tortas de chocolate suíço e polenta artesanal.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Manora Restaurant Lugano</p>
+                                <p class="text-slate-600 text-xs">Restaurante self-service de alta qualidade suíça com preço muito acessível em francos/euros.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 14: 12/10 (SEG) - DESLOCAMENTO 5 -->
+                <div class="day-card region-roma bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl border-2 border-amber-400 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-amber-500 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl text-sm">12/OUT (SEG)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Trem Milão → Roma & Terrazza Borromini</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-train-subway mr-1.5"></i>Frecciarossa Expresso (3h10)
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>08:00 Acordar</span>
+                        <span>10:10 Trem Frecciarossa</span>
+                        <span>13:20 Arrival Roma Termini</span>
+                        <span>16:00 Villa Borghese</span>
+                        <span>19:30 Rooftop Borromini</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Trem Frecciarossa 1000 sem paradas de Milão a Roma (3h10 em classe Prima).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Carrinho elétrico pelos jardins panorâmicos da Villa Borghese.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-glass-water text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Jantar Panorâmico de Despedida da Itália:</b> Rooftop *Terrazza Borromini* com vista da Piazza Navona.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2"></i>Opções para Jantar de Despedida em Roma:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-purple-900 text-purple-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-semibold text-white">Terrazza Borromini (Piazza Navona)</p>
+                                <p class="text-slate-400 text-xs">Mesa reservada no topo do palácio histórico de frente para as fontes de Roma.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-blue-900 text-blue-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-semibold text-white">Trattoria Da Enzo al 29 (Trastevere)</p>
+                                <p class="text-slate-400 text-xs">Cozinha romana de alma, alcachofras à giudia e atmosfera inigualável.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                                <span class="bg-emerald-900 text-emerald-200 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-semibold text-white">Pizzeria Emma (Campo de' Fiori)</p>
+                                <p class="text-slate-400 text-xs">Massa orgânica fermentada lentamente com ingredientes de topo a preços ótimos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 15: 13/10 (TER) -->
+                <div class="day-card region-roma bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-900 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">13/OUT (TER)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Roma Leve & Organização de Malas</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-full w-fit">
+                            <i class="fa-solid fa-mug-hot mr-1.5"></i>Dia de Descanso
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Manhã sem pressa. Últimas lembrancinhas na Via Cola di Rienzo.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Almoço tranquilo e organização final das malas.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-moon text-purple-600 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li>Jantar em bistrô ao lado do hotel e descanso antecipado para o voo de amanhã.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 16: 14/10 (QUA) - DESLOCAMENTO 6 -->
+                <div class="day-card region-frankfurt bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl border-2 border-slate-600 p-6 shadow-md space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-700 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-slate-700 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">14/OUT (QUA)</span>
+                            <h3 class="font-extrabold text-white text-lg sm:text-xl">Voo Roma (14:55) → Frankfurt (16:55)</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-slate-500/20 text-slate-300 border border-slate-500/40 rounded-full w-fit">
+                            <i class="fa-solid fa-plane-departure mr-1.5"></i>Voo Lufthansa LH235
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-xl text-xs sm:text-sm flex flex-wrap items-center justify-between gap-3 text-slate-200">
+                        <span class="font-bold text-amber-400 text-base"><i class="fa-solid fa-clock mr-1.5"></i>Horários do Dia:</span>
+                        <span>08:30 Acordar</span>
+                        <span>11:30 Transfer Fiumicino</span>
+                        <span>14:55 Voo LH235</span>
+                        <span>16:55 Pouso Frankfurt</span>
+                        <span>19:30 Jantar Alemão</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Café da manhã e transfer executivo para Fiumicino às 11:30.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/70 p-4 rounded-xl border border-slate-700">
+                            <span class="font-extrabold text-slate-200 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300">
+                                <li>Voo LH235 às 14:55. Pouso em Frankfurt às 16:55. Check-in no hotel.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-900/70 p-4 rounded-xl border border-purple-500/50 text-purple-200">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-beer-mug-empty text-purple-300 mr-1.5"></i>NOITE & CULTURA:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li><b>Boas-Vindas à Alemanha:</b> Jantar em taverna tradicional de Sachsenhausen degustando um Schnitzel autêntico.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 17: 15/10 (QUI) - FULL DAY FRANKFURT -->
+                <div class="day-card region-frankfurt bg-white rounded-2xl border-2 border-emerald-500 p-6 shadow-sm space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-emerald-600 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">15/OUT (QUI)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Dia Livre em Frankfurt & Voo Noturno (21:30)</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-emerald-100 text-emerald-800 rounded-full w-fit border border-emerald-200">
+                            <i class="fa-solid fa-plane-up mr-1.5"></i>Voo LATAM LA8071 às 21:30
+                        </span>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs sm:text-sm text-amber-900">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><b>Horários Sugeridos:</b> Acordar 08:30 | Römerberg 10:00 | Main Tower 12:30 | Almoço 14:00 | Aeroporto 18:30 | Voo 21:30</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">🌅 MANHÃ:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Praça histórica Römerberg e ponte Eiserner Steg sobre o Rio Main.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <span class="font-extrabold text-slate-900 block mb-2 text-base">☀️ TARDE:</span>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-700">
+                                <li>Elevador à Main Tower (vista 360°) e almoço em Sachsenhausen.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-purple-950">
+                            <span class="font-extrabold block mb-2 text-base"><i class="fa-solid fa-plane-departure text-purple-600 mr-1.5"></i>NOITE & EMBARQUE:</span>
+                            <ul class="list-disc list-inside space-y-1.5">
+                                <li>18:30 - Aeroporto de Frankfurt. Voo LATAM LA8071 às 21:30 rumo a São Paulo.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center">
+                            <i class="fa-solid fa-utensils mr-2 text-ferrari"></i>Opções para Alimentação em Frankfurt:
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">💎 Melhor Experiência</span>
+                                <p class="font-bold text-slate-900">Main Tower Restaurant (53º andar)</p>
+                                <p class="text-slate-600 text-xs">Refeição com vista panorâmica espetacular de todos os arranha-céus alemães.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">⚖️ Custo-Benefício</span>
+                                <p class="font-bold text-slate-900">Zum Gemalten Haus (Sachsenhausen)</p>
+                                <p class="text-slate-600 text-xs">Taberna histórica de 1936 servindo Schnitzel tradicional com molho verde da Alsácia.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-xs block w-fit mb-1">🏷️ Melhor Custo</span>
+                                <p class="font-bold text-slate-900">Kleinmarkthalle (Mercado Municipal)</p>
+                                <p class="text-slate-600 text-xs">Famosa salsicha alemã (Frankfurter Würstchen) servida no pão por €4,50.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIA 18: 16/10 (SEX) -->
+                <div class="day-card region-frankfurt bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-emerald-700 text-white font-bold px-3.5 py-1.5 rounded-xl text-sm">16/OUT (SEX)</span>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl">Chegada a São Paulo (GRU) às 04:35 AM</h3>
+                        </div>
+                        <span class="text-xs sm:text-sm font-semibold px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-full w-fit">
+                            <i class="fa-solid fa-house-chimney mr-1.5"></i>Fim da Viagem
+                        </span>
+                    </div>
+                    <p class="text-sm text-slate-700">Pouso no Aeroporto de Guarulhos no início da manhã. Viagem inesquecível concluída com sucesso!</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: GUIA EXCLUSIVO DE HOTÉIS -->
+        <section id="sec-hoteis" class="hidden space-y-8">
+            <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-1.5 rounded-full uppercase tracking-widest">Guia de Hospedagem Selecionada</span>
+                    <h2 class="text-2xl sm:text-3xl font-black mt-3 mb-2">Opções de Hotéis Acessíveis & Confortáveis</h2>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-3xl">Todas as opções foram selecionadas considerando <b>presença de elevador</b>, <b>fácil acesso sem escadarias longas</b> (ideal para gestante de 6 meses) e <b>classificação nos 3 níveis de experiência/custo</b>.</p>
+                </div>
+            </div>
+
+            <!-- NAVEGAÇÃO DE CIDADES DOS HOTÉIS -->
+            <div class="space-y-8">
+
+                <!-- 1. ROMA -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-red-100 text-ferrari flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-landmark"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Roma (Base 1: 29/09 a 03/10 • Base 2: 12/10 a 14/10)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Região recomendada: Bairro Prati (plano, calmo, com restaurantes e elevadores).</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- MELHOR EXPERIÊNCIA -->
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Eden - Dorchester Collection (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Vista espetacular dos telhados de Roma, elevadores clássicos e serviço VIP de concierge.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Hassler Roma (5★ Luxury)</p>
+                                    <p class="text-xs text-slate-600 mt-1">No topo da Escadaria de Espanha, conforto absoluto, spa para relaxamento e carros privativos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CUSTO-BENEFÍCIO -->
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. NH Collection Roma Giustiniano (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Localizado em Prati, 100% plano, elevadores amplos, quartos modernos e silêncio noturno.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Donna Laura Palace Hotel (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Bairro Prati/Lungotevere, vista charmosa do rio, elevador, terraço panorâmico e ótimo café.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MELHOR CUSTO -->
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Relais Mille Fiori (Boutique Guesthouse)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Guesthouse acolhedora em Prati com elevador no prédio histórico e excelente atendimento local.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Hotel della Conciliazione (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Em frente à Via della Conciliazione/Vaticano, acesso sem degraus e ótimo preço por noite.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. FLORENÇA -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-monument"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Florença (03/10 a 05/10 - 2 Noites)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Região recomendada: Próximo à Estação Firenze Santa Maria Novella (SMN) para caminhar com malas sem esforço.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. The St. Regis Florence (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Palácio histórico no Rio Arno com mordomo privativo e elevadores de época adaptados.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Hotel Savoy - Rocco Forte (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Piazza della Repubblica, elegância florentina clássica e serviço impecável.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Diplomat Florence (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">A apenas 100m da Estação SMN, elevadores modernos, sem necessidade de pegar táxi ao desembarcar.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Grand Hotel Baglioni (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Palácio renascentista transformado em hotel com elevadores e terraço rooftop incrível.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Boccaccio (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">A 3 minutos a pé da estação SMN, funcional, elevador privativo e equipe atenciosa.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Hotel Machiavelli Palace (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Estrutura tradicional a curtas passadas da estação, quartos confortáveis e bom preço.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. MODENA / MOTOR VALLEY -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-red-100 text-ferrari flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-car"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Modena / Motor Valley (05/10 a 08/10 - 3 Noites)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Fator OBRIGATÓRIO: Garagem privativa/coberta para guardar o SUV alugado com segurança.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Rua Frati 48 in San Francesco (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Único 5 estrelas do centro de Modena, valet parking privativo e luxo absoluto.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. RMH Modena Raffaello (4★ Superior)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Design moderno, garagem subterrânea privativa fantástica para o SUV e gastronomia de autor.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Executive Hotel Modena (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Garagem privativa subterrânea de fácil manobra, elevador direto aos quartos e ótimo acesso a Maranello.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Best Western Premier Milano Palace (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Ao lado do Museu Casa Enzo Ferrari em Modena centro, com garagem coberta reservada.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. B&B Hotel Modena (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Estacionamento gratuito no local, quartos novos, elevadores rápidos e preços imbatíveis.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Hotel Cervetta 5 (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">No coração de Modena, convênio com garagem próxima e ambiente acolhedor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. VENEZA (CANNAREGIO - SEM PONTES) -->
+                <div class="bg-white p-6 rounded-2xl border-2 border-teal-400 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-water-ladder"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Veneza (08/10 a 09/10 - 1 Noite)</h3>
+                            <p class="text-xs sm:text-sm text-teal-800 font-semibold">REQUISITO VITAL: Localizados no Bairro Cannaregio / Lista di Spagna para desembarcar do trem sem subir NENHUMA ponte ou degrau com malas!</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Radisson Collection Hotel, Palazzo Nani (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Fondamenta Cannaregio, palácio veneziano restaurado com elevadores modernos e pátio privativo.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Ca' Sagredo Hotel (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Palácio do século XV sobre o Canal Grande com vista para o Mercado de Rialto e elevadores internos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Principe Venice (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Na Lista di Spagna, a 150m da estação sem pontes! Terraço na água, elevador e recepção 24h.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. NH Venezia Santa Lucia (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Praticamente ao lado da estação de trem, acessibilidade perfeita, elevadores e ótimo café.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hotel Ca' Dogaressa (3★ Boutique)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Em Cannaregio com estilo veneziano clássico, elevador e caminho totalmente plano da estação.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. The Venice Times Hotel (4★ Design)</p>
+                                    <p class="text-xs text-slate-600 mt-1">A 3 minutos a pé da estação sem nenhuma ponte no trajeto. Estilo contemporâneo e confortável.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. MILÃO -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-sky-100 text-azurro flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-city"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Milão (09/10 a 12/10 - 3 Noites)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Região recomendada: Próximo à Estação Milano Centrale (fácil conexão para Lugano/Suíça).</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Excelsior Hotel Gallia - Luxury Collection (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Em frente à Milano Centrale, monumento do Art Déco milanês com spa e serviço 5★.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Mandarin Oriental Milan (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">No Quadrilátero da Moda, palácios do século XVIII com luxo e conforto contemporâneo.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Glam Hotel Milano (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Localizado diretamente na Piazza Duca d'Aosta (Central), elevadores amplos, isolamento acústico excelente.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Starhotels Anderson (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">A 50 metros do desembarque do trem, design refinado, elevadores e ótimo restaurante.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Ibis Styles Milano Centro (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Perto de Corso Buenos Aires/Estação, limpo, seguro, elevador e preço justo.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Spice Hotel Milano (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Estilo boutique a 3 minutos a pé da estação central, totalmente remodelado.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. FRANKFURT -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                        <span class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-plane"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Frankfurt (14/10 a 15/10 - 1 Noite Stopover)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Região recomendada: Conectado ao Aeroporto FRA (The Squaire) para evitar pegar táxis à noite.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="border-2 border-purple-200 bg-purple-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-purple-900 text-purple-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">💎 Melhor Experiência</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Steigenberger Icon Frankfurter Hof (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Hotel histórico lendário no centro de Frankfurt com luxo tradicional alemão.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-purple-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Sofitel Frankfurt Opera (5★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Na praça da antiga ópera de Frankfurt, requinte francês e spa premium.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-blue-200 bg-blue-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-blue-900 text-blue-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">⚖️ Custo-Benefício (Recomendado)</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hilton Garden Inn Frankfurt Airport (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Dentro do complexo The Squaire sobre a estação de trem do aeroporto. Acesso direto sem pegar táxi!</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Sheraton Frankfurt Airport Hotel (4★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Conectado ao Terminal 1 por passarela coberta, ideal para quem desembarca de Roma.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-emerald-200 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                            <span class="bg-emerald-900 text-emerald-200 font-bold px-2.5 py-1 rounded text-xs block w-fit">🏷️ Melhor Custo</span>
+                            <div class="space-y-2">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">1. Hampton by Hilton Frankfurt Airport (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Shuttle/Uber rápido de 5 minutos até os terminais, novinho, limpo e ótimo café.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <p class="font-bold text-slate-900 text-sm">2. Meininger Hotel Frankfurt Airport (3★)</p>
+                                    <p class="text-xs text-slate-600 mt-1">Acessível no bairro do aeroporto Gateway Gardens, funcional e muito seguro.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 4: ESPECIAL VENEZA -->
+        <section id="sec-veneza" class="hidden space-y-6">
+            <div class="bg-teal-900 text-white p-6 sm:p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-teal-500 text-white font-bold text-xs sm:text-sm px-3.5 py-1.5 rounded-full uppercase tracking-widest">Guia Sem Esforço</span>
+                    <h2 class="text-2xl sm:text-3xl font-black mt-3 mb-2">Veneza dos Sonhos (Sem Pontes & Sem Peso)</h2>
+                    <p class="text-teal-100 text-sm sm:text-base max-w-2xl">Aprenda a aproveitar os canais mais famosos do mundo garantindo o conforto total para a gestante.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm sm:text-base">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <h3 class="font-extrabold text-slate-900 text-lg"><i class="fa-solid fa-hotel text-teal-600 mr-2"></i>1. Onde Ficar (Cannaregio)</h3>
+                    <p class="text-slate-700">Reserve hotéis localizados na saída da **Estação Venezia Santa Lucia** (Bairro Cannaregio / Lista di Spagna, como o <i>Hotel Principe</i> ou <i>Hotel Ca' Dogaressa</i>).</p>
+                    <p class="text-teal-900 font-semibold bg-teal-50 p-3 rounded-xl border border-teal-100">Zero escadas/pontes com malas grandes ao desembarcar do trem!</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <h3 class="font-extrabold text-slate-900 text-lg"><i class="fa-solid fa-ship text-teal-600 mr-2"></i>2. Deslocamentos Internos</h3>
+                    <p class="text-slate-700">• Use os bilhetes do **Vaporetto** (ônibus aquático da ACTV) linha 1 para navegar todo o Canal Grande sentados.</p>
+                    <p class="text-slate-700">• Opcional: **Táxi Aquático Privativo** direto da estação para a Piazza San Marco.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <h3 class="font-extrabold text-slate-900 text-lg"><i class="fa-solid fa-water-ladder text-teal-600 mr-2"></i>3. Passeio de Gôndola</h3>
+                    <p class="text-slate-700">Embarque nos pontos mais tranquilos de Cannaregio ou San Marcuola ao entardecer. Gondoleiros ajudam na entrada/saída com total segurança.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: ROTA DOS MOTORES -->
+        <section id="sec-motors" class="hidden space-y-6">
+            <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-ferrari text-white font-bold text-xs sm:text-sm px-3.5 py-1.5 rounded-full uppercase tracking-widest">Circuito Esportivo</span>
+                    <h2 class="text-2xl sm:text-3xl font-black mt-3 mb-2">Motor Valley: Ferrari, Senna em Ímola & Lamborghini</h2>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-2xl">Os maiores nomes do automobilismo mundial reunidos na Emilia-Romagna.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- MEMORIAL SENNA -->
+                <div class="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden shadow-sm">
+                    <div class="bg-gradient-to-r from-amber-400 via-emerald-500 to-blue-600 h-3"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold bg-slate-100 px-3 py-1 rounded-lg text-slate-700">Ímola • Autódromo</span>
+                            <i class="fa-solid fa-flag-checkered text-xl text-slate-800"></i>
+                        </div>
+                        <h3 class="font-extrabold text-xl text-slate-900">Memorial Ayrton Senna</h3>
+                        <p class="text-sm text-slate-600">No *Parco delle Acque Minerali*, na curva Tamburello em Ímola. Percurso plano e acessível.</p>
+                        <div class="space-y-2 text-sm border-t border-slate-100 pt-3 text-slate-700">
+                            <p><i class="fa-solid fa-location-dot text-red-500 mr-2"></i><b>Estacione na:</b> Via Malsicura</p>
+                            <p><i class="fa-solid fa-ticket text-emerald-600 mr-2"></i><b>Entrada:</b> Gratuita (Parque)</p>
+                            <p><i class="fa-solid fa-camera text-blue-600 mr-2"></i><b>Destaques:</b> Estátua de bronze e Mural de Kobra.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MUSEU FERRARI -->
+                <div class="bg-white rounded-2xl border-2 border-red-200 overflow-hidden shadow-sm">
+                    <div class="bg-ferrari h-3"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold bg-red-100 px-3 py-1 rounded-lg text-ferrari">Maranello & Modena</span>
+                            <i class="fa-solid fa-car text-xl text-ferrari"></i>
+                        </div>
+                        <h3 class="font-extrabold text-xl text-slate-900">Museu Ferrari (Passaporte Duplo)</h3>
+                        <p class="text-sm text-slate-600">Museo Ferrari Maranello + Museo Casa Enzo Ferrari Modena.</p>
+                        <div class="space-y-2 text-sm border-t border-slate-100 pt-3 text-slate-700">
+                            <p><i class="fa-solid fa-utensils text-amber-600 mr-2"></i><b>Almoço:</b> *Ristorante Cavallino* em Maranello.</p>
+                            <p><i class="fa-solid fa-ticket text-emerald-600 mr-2"></i><b>Ingresso:</b> Bilhete Combo antecipado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MUSEU LAMBORGHINI -->
+                <div class="bg-white rounded-2xl border-2 border-amber-200 overflow-hidden shadow-sm">
+                    <div class="bg-lambo h-3"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold bg-amber-100 px-3 py-1 rounded-lg text-amber-900">Sant'Agata Bolognese</span>
+                            <i class="fa-solid fa-bolt text-xl text-amber-600"></i>
+                        </div>
+                        <h3 class="font-extrabold text-xl text-slate-900">Museo Automobili Lamborghini</h3>
+                        <p class="text-sm text-slate-600">Acervo de supercarros Miura, Countach, Aventador e Revuelto.</p>
+                        <div class="space-y-2 text-sm border-t border-slate-100 pt-3 text-slate-700">
+                            <p><i class="fa-solid fa-clock text-amber-600 mr-2"></i><b>Horário:</b> 09:30 às 18:00</p>
+                            <p><i class="fa-solid fa-wheelchair text-blue-600 mr-2"></i><b>Acessibilidade:</b> Elevadores nos andares.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: GASTRONOMIA CONSOLIDADA -->
+        <section id="sec-gastronomia" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Guia de Gastronomia do Roteiro</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Mapeamento dos melhores locais divididos por padrão de despesa.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border-2 border-purple-300 bg-purple-50/50 p-5 rounded-2xl space-y-3">
+                        <span class="bg-purple-900 text-purple-200 font-bold px-3 py-1 rounded-lg text-xs uppercase tracking-wider">💎 Experiência Premium</span>
+                        <h3 class="font-bold text-lg text-slate-900">Alta Gastronomia</h3>
+                        <ul class="text-xs sm:text-sm space-y-2 text-slate-700">
+                            <li>• <b>Roma:</b> Ristorante Aroma / Il Pagliaccio</li>
+                            <li>• <b>Florença:</b> Enoteca Pinchiorri / Buca Lapi</li>
+                            <li>• <b>Modena:</b> Osteria Francescana / Ristorante Cavallino</li>
+                            <li>• <b>Veneza:</b> Ristorante Glam / Quadri San Marco</li>
+                            <li>• <b>Milão:</b> Enrico Bartolini MUDEC / Cracco</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-2 border-blue-300 bg-blue-50/50 p-5 rounded-2xl space-y-3">
+                        <span class="bg-blue-900 text-blue-200 font-bold px-3 py-1 rounded-lg text-xs uppercase tracking-wider">⚖️ Custo-Benefício</span>
+                        <h3 class="font-bold text-lg text-slate-900">Trattorias Clássicas</h3>
+                        <ul class="text-xs sm:text-sm space-y-2 text-slate-700">
+                            <li>• <b>Roma:</b> Flavio al Velavevodetto / Zi Umberto</li>
+                            <li>• <b>Florença:</b> Trattoria 4 Leoni / Trattoria Mario</li>
+                            <li>• <b>Bolonha:</b> Trattoria Anna Maria / Osteria Rossi</li>
+                            <li>• <b>Veneza:</b> Osteria al Cicheto / Bea Vita</li>
+                            <li>• <b>Milão:</b> Trattoria Milanese 1933</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-2 border-emerald-300 bg-emerald-50/50 p-5 rounded-2xl space-y-3">
+                        <span class="bg-emerald-900 text-emerald-200 font-bold px-3 py-1 rounded-lg text-xs uppercase tracking-wider">🏷️ Melhor Custo</span>
+                        <h3 class="font-bold text-lg text-slate-900">Street Food & Econômico</h3>
+                        <ul class="text-xs sm:text-sm space-y-2 text-slate-700">
+                            <li>• <b>Roma:</b> Trattoria Da Remo / Trapizzino</li>
+                            <li>• <b>Florença:</b> All'Antico Vinaio / I' Girone</li>
+                            <li>• <b>Bolonha:</b> Osteria del Sole / Mercato Albinelli</li>
+                            <li>• <b>Veneza:</b> Bacareto da Lele / Farini Bakery</li>
+                            <li>• <b>Milão:</b> Luini Panzerotti / Mercato Centrale</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 7: RESUMO PARA RESERVAS (ATUALIZADO COM CARRO & HOTÉIS) -->
+        <section id="sec-reservas" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-bookmark"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Guia Prático para Reservas de Logística</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Tabela de referência direta para efetuação de reservas de hotéis, carro e passagens de trem.</p>
+                    </div>
+                </div>
+
+                <!-- HOTÉIS RECOMENDADOS -->
+                <div class="mb-8">
+                    <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center">
+                        <i class="fa-solid fa-hotel text-ferrari mr-2"></i>1. Hotéis Recomendados (Bases do Roteiro)
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                                    <th class="p-3.5">Base / Cidade</th>
+                                    <th class="p-3.5">Período</th>
+                                    <th class="p-3.5">Localização Indicada</th>
+                                    <th class="p-3.5">Opção Custo-Benefício Indicada</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Roma (Base 1)</td>
+                                    <td class="p-3.5">29/09 a 03/10 (4 noites)</td>
+                                    <td class="p-3.5">Bairro Prati (Plano e calmo)</td>
+                                    <td class="p-3.5">NH Collection Roma Giustiniano / Donna Laura Palace</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Florença</td>
+                                    <td class="p-3.5">03/10 a 05/10 (2 noites)</td>
+                                    <td class="p-3.5">Perto da Estação SMN</td>
+                                    <td class="p-3.5">Hotel Diplomat / Grand Hotel Baglioni</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Modena / Maranello</td>
+                                    <td class="p-3.5">05/10 a 08/10 (3 noites)</td>
+                                    <td class="p-3.5">Hotel com Garagem Privada</td>
+                                    <td class="p-3.5">Executive Hotel Modena (Garagem coberta para o SUV)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 text-teal-950 bg-teal-50/50 font-medium">
+                                    <td class="p-3.5 font-bold">Veneza (Cannaregio)</td>
+                                    <td class="p-3.5 font-bold">08/10 a 09/10 (1 noite)</td>
+                                    <td class="p-3.5">Ao lado da Estação Santa Lucia</td>
+                                    <td class="p-3.5">Hotel Principe / NH Venezia Santa Lucia (Sem pontes/degraus!)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Milão</td>
+                                    <td class="p-3.5">09/10 a 12/10 (3 noites)</td>
+                                    <td class="p-3.5">Centro / Estação Central</td>
+                                    <td class="p-3.5">Glam Hotel Milano / Starhotels Anderson</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Roma (Base 2)</td>
+                                    <td class="p-3.5">12/10 a 14/10 (2 noites)</td>
+                                    <td class="p-3.5">Bairro Prati ou Centro</td>
+                                    <td class="p-3.5">NH Collection Roma Giustiniano / Relais Mille Fiori</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3.5 font-bold text-slate-900">Frankfurt</td>
+                                    <td class="p-3.5">14/10 a 15/10 (1 noite)</td>
+                                    <td class="p-3.5">Aeroporto FRA (The Squaire)</td>
+                                    <td class="p-3.5">Hilton Garden Inn Frankfurt Airport (Conectado ao terminal)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RESERVA DE AUTOMÓVEL (ATUALIZAÇÃO DETALHADA) -->
+                <div class="mb-8 border-2 border-red-200 bg-red-50/30 rounded-2xl p-6 space-y-4">
+                    <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider flex items-center">
+                        <i class="fa-solid fa-car text-ferrari mr-2 text-xl"></i>2. Especificações da Reserva de Automóvel (Motor Valley)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                        <div class="bg-white p-4 rounded-xl border border-red-100 space-y-2">
+                            <p class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-calendar-check text-ferrari mr-1.5"></i> Datas & Locais da Reserva:</p>
+                            <p>• <b>Retirada:</b> 05/OUT (09:00) — Aeroporto de Florença (Amerigo Vespucci - FLR)</p>
+                            <p>• <b>Devolução:</b> 08/OUT (09:30) — Agência Estação Bologna Centrale</p>
+                            <p>• <b>Duração:</b> 3 Diárias completas.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-red-100 space-y-2">
+                            <p class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-shield-halved text-emerald-600 mr-1.5"></i> Categoria & Inclusões Recomendadas:</p>
+                            <p>• <b>Categoria:</b> SUV Médio Automático (ex: VW Tiguan, Volvo XC40, Peugeot 3008).</p>
+                            <p>• <b>Inclusão Fundamental:</b> Cobertura de Proteção Total com Zero Franquia (Super CDW + TP).</p>
+                            <p>• <b>Espaço de Mala:</b> Capacidade para 2 malas grandes + 2 de mão no porta-malas fechado.</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-100 border border-amber-300 text-amber-950 p-3.5 rounded-xl text-xs sm:text-sm font-medium">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-700 mr-1.5"></i><b>Regras da ZTL & Estacionamento:</b> A retirada no Aeroporto de Florença evita integralmente a ZTL de Florença. Em Modena, certifique-se de estacionar na garagem privativa coberta do Executive Hotel Modena. Na devolução em Bolonha, siga a sinalização específica de acesso à agência de aluguel na estação para evitar faixas de ônibus.
+                    </div>
+                </div>
+
+                <!-- TRENS RECOMENDADOS -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center">
+                        <i class="fa-solid fa-train text-azurro mr-2"></i>3. Trechos de Trem (Trenitalia / EuroCity)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs sm:text-sm">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <span class="bg-red-100 text-ferrari font-bold px-2.5 py-1 rounded text-xs">03/OUT</span>
+                            <h4 class="font-bold text-slate-900 mt-2">Roma Termini → Florença SMN</h4>
+                            <p class="text-slate-600">Frecciarossa 9:20 (1h30)</p>
+                        </div>
+                        <div class="border border-teal-200 rounded-xl p-4 bg-teal-50">
+                            <span class="bg-teal-700 text-white font-bold px-2.5 py-1 rounded text-xs">08/OUT</span>
+                            <h4 class="font-bold text-slate-900 mt-2">Bolonha Centrale → Venezia Santa Lucia</h4>
+                            <p class="text-slate-600">Frecciarossa 10:30 (1h30)</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <span class="bg-red-100 text-ferrari font-bold px-2.5 py-1 rounded text-xs">09/OUT</span>
+                            <h4 class="font-bold text-slate-900 mt-2">Venezia Santa Lucia → Milano Centrale</h4>
+                            <p class="text-slate-600">Frecciarossa 16:30 (2h00)</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <span class="bg-blue-100 text-azurro font-bold px-2.5 py-1 rounded text-xs">11/OUT</span>
+                            <h4 class="font-bold text-slate-900 mt-2">Milano Centrale → Lugano (Suíça)</h4>
+                            <p class="text-slate-600">EuroCity 09:10 (1h02m Direto)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 8: PREVISÃO DE DESPESAS COMPLETA -->
+        <section id="sec-orcamento" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center space-x-4 mb-2">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Previsão e Comparativo de Despesas (2 Pessoas)</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Estimativas recalculadas considerando os 3 perfis de viagem durante os 18 dias.</p>
+                    </div>
+                </div>
+
+                <!-- COMPARATIVO 3 PERFIS DE CUSTO -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-emerald-50 border-2 border-emerald-300 p-6 rounded-2xl space-y-3">
+                        <span class="bg-emerald-800 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Perfil Econômico (Low-Cost)</span>
+                        <div class="text-2xl font-black text-emerald-900">€ 5.200</div>
+                        <p class="text-xs text-emerald-800 font-medium">Aprox. R$ 31.200 (Cotação R$ 6,00)</p>
+                        <ul class="text-xs sm:text-sm space-y-1.5 text-emerald-950 border-t border-emerald-200 pt-3">
+                            <li>• Alimentos em trattorias simples e street food (€80-100/dia casal).</li>
+                            <li>• Hotéis 3 estrelas funcionais perto da estação.</li>
+                            <li>• Aluguel de carro econômico manual.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-3 shadow-lg relative border-2 border-amber-400">
+                        <span class="bg-amber-400 text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase">Recomendado (Equilibrado)</span>
+                        <div class="text-3xl font-black text-amber-400">€ 6.850</div>
+                        <p class="text-xs text-slate-300 font-medium">Aprox. R$ 41.100 (Cotação R$ 6,00)</p>
+                        <ul class="text-xs sm:text-sm space-y-1.5 text-slate-200 border-t border-slate-700 pt-3">
+                            <li>• Trattorias tradicionais consagradas e gelato diário (€150-180/dia casal).</li>
+                            <li>• Hotéis 4 estrelas com elevador e localização premium.</li>
+                            <li>• SUV automático + Trens Prima Class.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-50 border-2 border-purple-300 p-6 rounded-2xl space-y-3">
+                        <span class="bg-purple-800 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Perfil Premium (Experiência VIP)</span>
+                        <div class="text-2xl font-black text-purple-900">€ 9.800+</div>
+                        <p class="text-xs text-purple-800 font-medium">Aprox. R$ 58.800 (Cotação R$ 6,00)</p>
+                        <ul class="text-xs sm:text-sm space-y-1.5 text-purple-950 border-t border-purple-200 pt-3">
+                            <li>• Restaurantes Michelin e rooftops panorâmicos (€300+/dia casal).</li>
+                            <li>• Hotéis 5 estrelas / Boutiques históricas.</li>
+                            <li>• Transfers privados VIP + Test drive Ferrari.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RESUMO DETALHADO DO ORÇAMENTO RECOMENDADO -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 text-sm">
+                    <h3 class="font-bold text-slate-900 text-base uppercase tracking-wider">Detalhamento do Orçamento Recomendado (€ 6.850):</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700">
+                        <div class="flex justify-between border-b pb-2">
+                            <span><b>Hospedagem com Elevador (15 noites):</b></span>
+                            <span class="font-bold text-slate-900">€ 3.100</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span><b>Alimentação Custo-Benefício (18 dias):</b></span>
+                            <span class="font-bold text-slate-900">€ 2.300</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span><b>Aluguel SUV + Gasolina + Pedágios (Motor Valley):</b></span>
+                            <span class="font-bold text-slate-900">€ 520</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span><b>Passagens de Trem Rápido + Vaporetto Veneza:</b></span>
+                            <span class="font-bold text-slate-900">€ 410</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2 col-span-1 md:col-span-2">
+                            <span><b>Ingressos (Passaporte Ferrari, Lambo, Coliseu Fast Track, Vaticano):</b></span>
+                            <span class="font-bold text-slate-900">€ 520</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 9: CHECKLIST & REQUISITOS -->
+        <section id="sec-checklist" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Documentação & Requisitos de Saúde</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Regras de trânsito e atestados de viagem para gestante.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="border-2 border-amber-300 bg-amber-50/50 p-6 rounded-2xl space-y-2">
+                        <h3 class="font-bold text-base text-slate-900"><i class="fa-solid fa-id-card text-amber-600 mr-2"></i>1. PID (Dirigir na Itália)</h3>
+                        <p class="text-xs sm:text-sm text-slate-700">Obrigatória para alugar e dirigir o SUV no Motor Valley. Solicite online no site do Detran do seu estado. Apresentar com CNH física.</p>
+                    </div>
+
+                    <div class="border border-slate-200 bg-slate-50 p-6 rounded-2xl space-y-2">
+                        <h3 class="font-bold text-base text-slate-900"><i class="fa-solid fa-passport text-azurro mr-2"></i>2. Seguro Viagem Schengen</h3>
+                        <p class="text-xs sm:text-sm text-slate-700">Obrigatório cobertura mínima de <b>€30.000</b>. Apólice com extensão especial para gestantes até 28-32 semanas.</p>
+                    </div>
+
+                    <div class="border border-pink-200 bg-pink-50/50 p-6 rounded-2xl space-y-2">
+                        <h3 class="font-bold text-base text-pink-900"><i class="fa-solid fa-stethoscope text-pink-600 mr-2"></i>3. Atestado Médico</h3>
+                        <p class="text-xs sm:text-sm text-pink-950">Atestado do obstetra em inglês/português autorizando a viagem aérea com 6 meses de gestação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 10: EXTRAS (SUÍÇA & FRANKFURT) -->
+        <section id="sec-extras" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Encaixe na Suíça Italiana: Lugano em 1 Dia</h3>
+                        <p class="text-sm text-slate-500">Apenas 1 hora de trem direto de Milão. Viagem leve sem levar bagagens.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-slate-900 text-base"><i class="fa-solid fa-train text-sky-600 mr-2"></i>Como Ir</h4>
+                        <p>• Trem direto EuroCity de Milano Centrale a Lugano (1h02m).</p>
+                        <p>• Sem malas grandes (permanecem no hotel em Milão).</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-slate-900 text-base"><i class="fa-solid fa-camera text-sky-600 mr-2"></i>Atrações em Lugano</h4>
+                        <p>• Lago de Lugano, chocolates na Via Nassa e Funicular no Monte San Salvatore.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border-2 border-emerald-500 shadow-sm">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Stopover em Frankfurt (Voo Noturno às 21:30)</h3>
+                        <p class="text-sm text-slate-500">Horário do voo LATAM LA8071 no dia 15/10!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-700">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-2"><i class="fa-solid fa-clock text-emerald-600 mr-2"></i>Voo Noturno às 21:30:</span>
+                        <p>Dia inteiro livre até as 18:30 para passear em Frankfurt sem pressa.</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-2"><i class="fa-solid fa-landmark mr-2"></i>Atrações:</span>
+                        <p>Praça Römerberg, ponte Eiserner Steg e mirante panorâmico da Main Tower.</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-2"><i class="fa-solid fa-utensils mr-2"></i>Gastronomia:</span>
+                        <p>Almoço com Schnitzel tradicional em Sachsenhausen.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 11: CENTRAL DE LINKS OFICIAIS & RESERVAS -->
+        <section id="sec-links" class="hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center space-x-4 mb-2">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Central de Portais e Links Oficiais de Reserva</h2>
+                        <p class="text-sm sm:text-base text-slate-500">Fontes 100% oficiais e seguras sem taxas de intermediários.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+                    <!-- TRENS -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-train text-azurro mr-2.5 text-lg"></i> Passagens de Trem
+                        </h3>
+                        <p class="text-xs text-slate-600">Compre com 60 a 90 dias de antecedência para obter tarifas Super Economy.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://www.trenitalia.com" target="_blank" class="font-bold text-azurro hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Trenitalia (Oficial)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Trem Frecciarossa de alta velocidade na Itália.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.italotreno.it" target="_blank" class="font-bold text-azurro hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Italo Treno (Oficial)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Operador privado concorrente na Itália.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.sbb.ch" target="_blank" class="font-bold text-azurro hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>SBB CFF FFS (Suíça)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Trens suíços (EuroCity Milão ↔ Lugano).</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- MOTORES -->
+                    <div class="border border-red-200 rounded-2xl p-5 bg-red-50/40 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-car text-ferrari mr-2.5 text-lg"></i> Motor Valley & F1
+                        </h3>
+                        <p class="text-xs text-slate-600">Reserve ingressos combinados e horários de simulador antecipadamente.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://www.ferrari.com/en-EN/museums" target="_blank" class="font-bold text-ferrari hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Museus Ferrari (Maranello & Modena)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Passaporte duplo oficial e simuladores F1.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.lamborghini.com/en-en/museum" target="_blank" class="font-bold text-amber-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Museo Automobili Lamborghini
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Ingressos oficiais e agendamento de Factory Tour.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.autodromoimola.it" target="_blank" class="font-bold text-slate-900 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Autodromo di Imola
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Informações do parque e Memorial Senna.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- MONUMENTOS -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-landmark text-emerald-700 mr-2.5 text-lg"></i> Monumentos & Museus
+                        </h3>
+                        <p class="text-xs text-slate-600">Evite cambistas. Compre nos portais oficiais com horário marcado.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://ticketing.colosseo.it" target="_blank" class="font-bold text-emerald-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Coliseu & Fórum Romano (Oficial)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Portal oficial do Parque Arqueológico do Coliseu.</span>
+                            </li>
+                            <li>
+                                <a href="https://tickets.museivaticani.va" target="_blank" class="font-bold text-emerald-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Museus do Vaticano & Sistina
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Bilhetes oficiais sem filas e tour de minibus.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.duomomilano.it" target="_blank" class="font-bold text-emerald-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Duomo de Milão (Oficial)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Duomo Pass com acesso aos terraços por elevador.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- HOTÉIS & CARROS -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-hotel text-slate-700 mr-2.5 text-lg"></i> Hospedagem & Veículos
+                        </h3>
+                        <p class="text-xs text-slate-600">Filtre por elevadores e garagens cobertas.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://www.booking.com" target="_blank" class="font-bold text-blue-700 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Booking.com
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Afiliação Genius com cancelamento grátis.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.rentalcars.com" target="_blank" class="font-bold text-blue-700 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Rentalcars / AutoEurope
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Comparador de SUV com cobertura total zero franquia.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- MOBILIDADE & APPS -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-mobile-screen text-purple-700 mr-2.5 text-lg"></i> Apps & Mobilidade
+                        </h3>
+                        <p class="text-xs text-slate-600">Aplicativos indispensáveis para o dia a dia na Itália.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://www.free-now.com" target="_blank" class="font-bold text-purple-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>App FreeNow (Táxis Itália)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Chame táxis oficiais em Roma, Florença e Milão.</span>
+                            </li>
+                            <li>
+                                <a href="https://www.thefork.com" target="_blank" class="font-bold text-purple-800 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>TheFork / Quandoo
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Reservas instantâneas em restaurantes.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- DOCUMENTAÇÃO -->
+                    <div class="border border-amber-200 rounded-2xl p-5 bg-amber-50/40 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center">
+                            <i class="fa-solid fa-id-card text-amber-700 mr-2.5 text-lg"></i> Documentos Oficiais
+                        </h3>
+                        <p class="text-xs text-slate-600">Documentação legal para o motorista.</p>
+                        <ul class="space-y-2.5 text-xs">
+                            <li>
+                                <a href="https://www.detran.sp.gov.br" target="_blank" class="font-bold text-amber-900 hover:underline flex items-center">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Portal Detran (PID)
+                                </a>
+                                <span class="text-slate-500 block mt-0.5">Solicitação da Permissão Internacional para Dirigir.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs sm:text-sm py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-bold text-slate-200">Roteiro de Viagem Personalizado • Itália, Veneza, Suíça & Alemanha</p>
+            <p>Desenvolvido exclusivamente para Felipe & Família • Setembro & Outubro 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('main > section').forEach(function(sec) {
+                sec.classList.add('hidden');
+            });
+            var targetSec = document.getElementById('sec-' + tabId);
+            if (targetSec) {
+                targetSec.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('#mainTabs .tab-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            var targetBtn = document.getElementById('tab-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterDays(region, btnElement) {
+            var cards = document.querySelectorAll('.day-card');
+            var buttons = document.querySelectorAll('.day-filter-btn');
+
+            buttons.forEach(function(btn) {
+                btn.classList.remove('bg-slate-900', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            if (btnElement) {
+                btnElement.classList.remove('bg-slate-100', 'text-slate-700');
+                btnElement.classList.add('bg-slate-900', 'text-white');
+            }
+
+            cards.forEach(function(card) {
+                if (region === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    if (card.classList.contains('region-' + region)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
